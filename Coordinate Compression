@@ -1,25 +1,11 @@
-//Jridi
-//coordinate compression 
-struct coordinateCopmression{
-private:
-    vector<ll>init;
-    void compress(vector<ll>&v)
-    {
-        sort(v.begin(),v.end());
-        v.erase(unique(v.begin(),v.end()),v.end());
-    }
-public:
-    coordinateCopmression(vector<ll>&v)
-    {
-        init=v;
-        compress(init);
-    }
-    int index(ll val)
-    {
-        return lower_bound(init.begin(),init.end(),val)-init.begin();
-    }
-    ll initVal(int idx)
-    {
-        return init[idx];
-    }
-};
+int n = a.size();
+vector<pair<int, int>> pairs(n);
+for(int i = 0; i < n; ++i) {
+	pairs[i] = {a[i], i};
+}
+sort(pairs.begin(), pairs.end());
+int nxt = 0;
+for(int i = 0; i < n; ++i) {
+	if(i > 0 && pairs[i-1].first != pairs[i].first) nxt++;
+	a[pairs[i].second] = nxt;
+}
